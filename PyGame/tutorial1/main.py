@@ -1,41 +1,32 @@
 import pygame
-from pygame.locals import *
 
-class App:
-    def __init__(self):
-        self._running = True
-        self._display_surf = None
-        self.size = self.weight, self.height = 640, 480
+# initialize pygame
+pygame.init()
 
-    def on_init(self):
-        pygame.init()
-        self._display_surf = pygame.display.set_mode(
-            self.size,
-            pygame.HWSURFACE | pygame.DOUBLEBUF
-        )
-        self._running = True
+# create the screen
+screen = pygame.display.set_mode((640, 480))
 
-    def on_event(self, event):
+# title and logo
+pygame.display.set_caption("Space Invaders")
+icon = pygame.image.load('ufo.png')
+pygame.display.set_icon(icon)
+
+# player
+playerImg = pygame.image.load('player-small.png')
+playerX = 320 - (playerImg.get_width() / 2)
+playerY = 400 - (playerImg.get_height() / 2)
+
+
+def player():
+    screen .blit(playerImg, (playerX, playerY))
+
+
+# game loop
+running = True
+while running:
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            self._running = False
-    def on_loop(self):
-        pass
-    def on_render(self):
-        pass
-    def on_cleanup(self):
-        pygame.quit()
-
-    def on_execute(self):
-        if self.on_init() is False:
-            self._running = False
-
-        while self._running:
-            for event in pygame.event.get():
-                self.on_event(event)
-            self.on_loop()
-            self.on_render()
-        self.on_cleanup()
-
-if __name__ == "__main__":
-    theApp = App()
-    theApp.on_execute()
+            running = False
+    screen.fill((100, 100, 100))
+    player()
+    pygame.display.update()
