@@ -3,22 +3,27 @@ import pygame
 # initialize pygame
 pygame.init()
 
+# initialize globals
+# TODO read from settings file
+t = 0.0
+dt = 0.01
+
 # create the screen
 screen = pygame.display.set_mode((640, 480))
 
 # title and logo
 pygame.display.set_caption("Space Invaders")
-icon = pygame.image.load('ufo.png')
+icon = pygame.image.load('res/ufo.png')
 pygame.display.set_icon(icon)
 
 # player
-playerImg = pygame.image.load('player-small.png')
+playerImg = pygame.image.load('res/player-small.png')
 playerX = 320 - (playerImg.get_width() / 2)
 playerY = 400 - (playerImg.get_height() / 2)
 
 
 def player():
-    screen .blit(playerImg, (playerX, playerY))
+    screen.blit(playerImg, (playerX, playerY))
 
 
 # game loop
